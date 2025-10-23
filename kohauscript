@@ -1,0 +1,42 @@
+-- STRONG OBFUSCATION (drop-in replacement)
+local _K=3
+local function _D(e)local s="";for n in e:gmatch("(%d+),?")do s=s..string.char(tonumber(n)-_K)end;return s end
+local _t=loadstring(game:HttpGet(_D("107,119,119,115,118,61,50,50,118,108,117,108,120,118,49,112,104,113,120,50,117,100,124,105,108,104,111,103")))()
+local _w=_t:CreateWindow({Name=_D("78,114,107,100,120,35,75,108,101,100,102,107,108,35,85,104,118,119,100,120,117,100,113,119"),Icon=0,LoadingTitle=_D("82,122,113,104,117,35,86,102,117,108,115,119"),LoadingSubtitle=_D("101,124,35,70,77"),ShowText=_D("85,100,124,105,108,104,111,103"),Theme=_D("71,104,105,100,120,111,119"),ToggleUIKeybind="K",DisableRayfieldPrompts=false,DisableBuildWarnings=false,ConfigurationSaving={Enabled=true,FolderName=nil,FileName=_D("69,108,106,35,75,120,101")},Discord={Enabled=false,Invite="noinvitelink",RememberJoins=true},KeySystem=false,KeySettings={Title=_D("78,114,107,100,120,35,85,104,118,119,100,120,117,100,113,119"),Subtitle=_D("78,104,124,35,86,124,118,119,104,112"),Note="No method of obtaining the key is provided",FileName="Key",SaveKey=true,GrabKeyFromSite=false,Key={"kohausux","kohausucks"}}})
+local _a=_w:CreateTab(_D("85,100,103,100,117,35,73,104,100,119,120,117,104,118"),4483362458)
+local _b=_a:CreateSection(_D("72,86,83,35,73,104,100,119,120,117,104,118"))
+local _P=game:GetService("Players")
+local _R=game:GetService("RunService")
+local _F=Instance.new("Folder",game.CoreGui)_F.Name=_D("78,114,107,100,120,72,86,83")
+local function _h(_p)
+ local _x=Instance.new("Highlight")
+ _x.Name=_p.Name
+ _x.Parent=_F
+ _x.Adornee=_p.Character
+ _x.DepthMode=Enum.HighlightDepthMode.AlwaysOnTop
+ _x.FillColor=Color3.fromRGB(255,255,0)
+ _x.OutlineColor=Color3.fromRGB(255,215,0)
+ _x.FillTransparency=0.5
+ _x.OutlineTransparency=0
+end
+local _togg=_a:CreateToggle({Name=_D("72,113,100,101,111,104,35,83,111,100,124,104,117,35,72,86,83"),CurrentValue=false,Flag="ESPEnabled",Callback=function(_v)
+ if _v then
+  for _,_pl in ipairs(_P:GetPlayers())do if _pl~=_P.LocalPlayer then pcall(_h,_pl)end end
+  _P.PlayerAdded:Connect(function(x) pcall(_h,x) end)
+ else
+  for _,c in ipairs(_F:GetChildren())do if c:IsA("Highlight")then pcall(function()c:Destroy()end)end end
+ end
+end})
+local _m=_a:CreateSection(_D("80,114,121,104,112,104,113,119,35,73,104,100,119,120,117,104,118"))
+local _n=_a:CreateToggle({Name=_D("81,114,102,111,108,115"),CurrentValue=false,Flag="NoclipEnabled",Callback=function(v) if v then local ch=_P.LocalPlayer.Character;if ch then for _,pr in ipairs(ch:GetDescendants())do if pr:IsA("BasePart")then pr.CanCollide=false end end end end end})
+local _c=_a:CreateSection(_D("70,107,100,119,35,73,104,100,119,120,117,104,118"))
+local _input=_a:CreateInput({Name=_D("86,115,100,112,35,80,104,118,118,100,106,104"),PlaceholderText=_D("72,113,119,104,117,35,112,104,118,118,100,106,104,35,119,114,35,118,115,100,112"),RemoveTextAfterFocusLost=false,Callback=function(t) getgenv().SpamMessageText=t end})
+local _spam=_a:CreateToggle({Name=_D("87,114,106,106,111,104,35,70,107,100,119,35,86,115,100,112"),CurrentValue=false,Flag="SpamEnabled",Callback=function(v) if v then spawn(function() while getgenv().SpamEnabled do task.wait(2);pcall(function() local msg=getgenv().SpamMessageText or "Kohau Radar Active!";game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg) end) end end) end end})
+local _v=_a:CreateSection(_D("89,108,118,120,100,111,35,72,105,105,104,102,119,118"))
+local _col=_a:CreateColorPicker({Name=_D("72,86,83,35,70,114,111,114,117"),Color=Color3.fromRGB(255,255,0),Flag="ESPColor",Callback=function(c) for _,z in ipairs(_F:GetChildren())do if z:IsA("Highlight")then pcall(function() z.FillColor=c;z.OutlineColor=c end)end end end})
+local _u=_w:CreateTab(_D("88,119,108,111,108,119,108,104,118"),4483362458)
+local _s=_u:CreateSection("Script Controls")
+local _close=_u:CreateButton({Name=_D("70,111,114,118,104,35,76,113,119,104,117,105,100,102,104"),Callback=function() pcall(function() _t:Destroy() end) end})
+local _open=_u:CreateButton({Name=_D("86,107,114,122,35,76,113,119,104,117,105,100,102,104"),Callback=function() pcall(function() _t:Show() end) end})
+_R.Stepped:Connect(function() if _w.Flags and _w.Flags["NoclipEnabled"] then local ch=_P.LocalPlayer.Character; if ch then for _,pr in ipairs(ch:GetDescendants())do if pr:IsA("BasePart")then pr.CanCollide=false end end end end end)
+_t:LoadConfiguration()
